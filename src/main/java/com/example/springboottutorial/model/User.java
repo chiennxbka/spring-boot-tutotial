@@ -1,24 +1,50 @@
 package com.example.springboottutorial.model;
 
+import com.example.springboottutorial.payload.JobEnum;
+import com.example.springboottutorial.payload.UserPayload;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "user")
 public class User {
 
-    private String username;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String firstName;
+
+    private String lastName;
+
+    @Column(unique = true)
     private String email;
 
-    public User() {
+    private JobEnum job;
+
+    private String streetName;
+
+    private String streetNo;
+
+    private String city;
+
+    private String country;
+
+    private String avatar;
+
+    public String getFirstName() {
+        return firstName;
     }
 
-    public User(String username, String email) {
-        this.username = username;
-        this.email = email;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getUsername() {
-        return username;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -27,5 +53,64 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public JobEnum getJob() {
+        return job;
+    }
+
+    public void setJob(JobEnum job) {
+        this.job = job;
+    }
+
+    public String getStreetName() {
+        return streetName;
+    }
+
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
+
+    public String getStreetNo() {
+        return streetNo;
+    }
+
+    public void setStreetNo(String streetNo) {
+        this.streetNo = streetNo;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public void toEntity(UserPayload payload) {
+        this.firstName = payload.getFirstName();
+        this.lastName = payload.getLastName();
+        this.email = payload.getEmail();
+        this.job = payload.getJob();
+        this.city = payload.getAddress().getCity();
+        this.country = payload.getAddress().getCountry();
+        this.streetName = payload.getAddress().getStreetName();
+        this.streetNo = payload.getAddress().getStreetNo();
     }
 }

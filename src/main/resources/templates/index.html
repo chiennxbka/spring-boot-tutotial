@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+</head>
+<body>
+<div th:each="item: ${data}">
+    <a th:href="@{/product/detail/1}" th:text="${item}"></a>
+</div>
+</body>
+</html>
+
